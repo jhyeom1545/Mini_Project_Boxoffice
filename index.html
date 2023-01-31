@@ -16,24 +16,60 @@
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- BootStrap -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
+    <!-- stylus -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/stylus/0.32.1/stylus.min.js"
+      integrity="sha512-G3S73eJ2+B88sRHf0WL08c1eof8pyPo08ZafuJY2FgtMCtInrSybAW/Cqso/dA97ztOsxmczwXqKcLD60g9kjg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
     <!-- StyleSheet -->
     <link href="./css/index.css" rel="stylesheet" />
   </head>
   <body>
     <div id="app">
-      <!-- Header -->
-      <header
-        id="headerComp"
-        class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
       >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{info.movieNm}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div></div>
+              <div>감독: {{info.director}}</div>
+              <div>배우: {{info.actor}}</div>
+              <div>상영시간: {{info.showTm}}분</div>
+              <div>제작 국가: {{info.nation}}</div>
+              <div>장르: {{info.genre}}</div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Header -->
+      <header id="headerComp" class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
         <!-- 1. BoxOffice  -->
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#"
-          >BoxOffice</a
-        >
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">BoxOffice</a>
         <!-- 2. inputBox -->
         <input
           class="form-control form-control-dark w-100 rounded-0 border-0"
@@ -45,19 +81,14 @@
         <div class="navbar-nav">
           <div class="nav-item text-nowrap">
             <!-- 3. SearchButton -->
-            <a class="nav-link px-3" href="#" v-on:click="searchBtnClicked"
-              >Search</a
-            >
+            <a class="nav-link px-3" href="#" v-on:click="searchBtnClicked">Search</a>
           </div>
         </div>
       </header>
 
       <div class="container-fluid">
         <div class="row">
-          <nav
-            id="sidebarMenu"
-            class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
-          >
+          <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
             <div class="position-sticky pt-3 sidebar-sticky">
               <ul class="nav flex-column">
                 <a class="nav-link active" aria-current="page" href="#">
@@ -90,16 +121,11 @@
                   <tr v-for="(movie, index) in movies">
                     <td>{{movie.rank}}</td>
                     <td><img v-bind:src="movie.poster" /></td>
-                    <td>{{movie.movieNm}}</td>
+                    <td v-on:click="descriptonClicked(index)">{{movie.movieNm}}</td>
                     <td>{{movie.audiCnt}}</td>
                     <td>{{movie.openDt}}</td>
                     <td>
-                      <input
-                        v-on:click="doRemove(index)"
-                        type="button"
-                        class="btn btn-danger"
-                        value="삭제"
-                      />
+                      <input v-on:click="doRemove(index)" type="button" class="btn btn-danger" value="삭제" />
                     </td>
                   </tr>
                 </tbody>
@@ -109,6 +135,8 @@
         </div>
       </div>
     </div>
-    <script src="./js/index.js"></script>
+    <script type="module" src="./js/index.js"></script>
+
+    <!-- end -->
   </body>
 </html>
